@@ -1,4 +1,4 @@
-# from artiq.experiment import*                                   
+from artiq.experiment import*                                   
 
 # Class that defines parameters and settings for basic Urukul control
 
@@ -11,18 +11,21 @@ class UKC:
         self.output_duration = self.__get_output_duration()
 
     def __get_frequency(self):
-        frequency = 10
+        frequency_list = [8,10,8,12,8,10,8,12]
         unit = MHz
         
-        return frequency*unit
+        # List comprehension to apply unit to each frequency
+        frequency_w_units = [freq * unit for freq in frequency_list]
+        
+        return frequency_w_units
     
     def __get_attenuation(self):
-        attenuation = 1 
+        attenuation = 1.0
         
         return attenuation
 
     def __get_amplitude(self):
-        amplitude = 1
+        amplitude = 1.0
         
         return amplitude 
     
@@ -41,7 +44,7 @@ class UKC:
         
         return active_channels 
     
-    def __get_output_duration():
+    def __get_output_duration(self):
         output_duration = 5
         unit = s
 
