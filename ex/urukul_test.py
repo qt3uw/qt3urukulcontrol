@@ -1,12 +1,10 @@
 from artiq.experiment import*                                   #imports everything from the artiq experiment library
-
 #This code outputs a predefined frequency at a fixed amplitude on a single channel of the urukul
 #The ouput persists for 2 seconds and the turns off
 
 class Urukul_Frequency_Pulse(EnvExperiment):
     """Urukul Single Frequency Pulse"""
     def build(self): #This code runs on the host device
-
         self.setattr_device("core")                             #sets core device drivers as attributes
         self.setattr_device("urukul0_ch1")                      #sets urukul0, channel 1 device drivers as attributes
         
@@ -18,7 +16,7 @@ class Urukul_Frequency_Pulse(EnvExperiment):
         self.urukul0_ch1.init()                                 #initialises channel 1
         delay(10 * ms)                                          #10ms delay
         
-        freq = 100*MHz                                          #defines frequency variable
+        freq = 10*MHz                                           #defines frequency variable
         amp = 1.0                                               #defines amplitude variable as an amplitude scale factor(0 to 1)
         attenuation= 1.0                                        #defines attenuation variable
 
@@ -28,10 +26,5 @@ class Urukul_Frequency_Pulse(EnvExperiment):
            
             
         self.urukul0_ch1.set(freq, amplitude = amp)             #writes frequency and amplitude variables to urukul channel thus outputting function
-        delay(5*s)                                              #2s delay
+        delay(5*s)                                              #delay
         self.urukul0_ch1.sw.off()                               #switches urukul channel off
-
-        self.urukul0_ch1.set_att(attenuation)
-        self.urukul0_ch1.set(100*MHz, amplitude=0.5)
-        delay(5*s)
-        self.urukul0_ch1.sw.off()
