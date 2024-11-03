@@ -22,6 +22,8 @@ class sample_expirement(EnvExperiment):
         attenuation = self.paramaters.attenuation
 
         self.urukul0_ch1.set_att(attenuation)
+        self.urukul0_ch1.sw.on() 
+        
         for frequency in freq:
             self.urukul0_ch1.set(frequency, amplitude = amp)
             delay(0.5*s)

@@ -11,7 +11,7 @@ class UKC:
         self.output_duration = self.__get_output_duration()
 
     def __get_frequency(self):
-        frequency_list = [8,10,8,12,8,10,8,12]
+        frequency_list = [6.42]
         unit = MHz
         
         # List comprehension to apply unit to each frequency
