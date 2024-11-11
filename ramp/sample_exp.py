@@ -22,7 +22,7 @@ class SampleExperiment(EnvExperiment):
 
         # Run frequency and amplitude ramping
         self.ramp.run_frequency_ramp(self.urukul0_ch1)
-        self.ramp.run_amplitude_ramp(self.urukul0_ch1)
+        # self.ramp.run_amplitude_ramp(self.urukul0_ch1)
 
         # Turn off the DDS channel after completing the ramp
         self.urukul0_ch1.sw.off()

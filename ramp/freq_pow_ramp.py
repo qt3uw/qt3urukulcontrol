@@ -3,9 +3,9 @@ from artiq.experiment import *
 class RampControl:
     def __init__(self):
         # freq ramp parameters
-        self.start_freq = 5 * MHz
+        self.start_freq = 1 * MHz
         self.end_freq = 50 * MHz
-        self.ramp_duration = 100 * ms
+        self.ramp_duration = 10000 * ms
         self.num_steps = 1000
         self.step_duration = self.ramp_duration / self.num_steps
         self.freq_step = (self.end_freq - self.start_freq) / self.num_steps
