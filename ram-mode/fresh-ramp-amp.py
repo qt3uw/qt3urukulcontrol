@@ -7,12 +7,14 @@ class ad9910RAM(EnvExperiment):
 
     def build(self):
         self.setattr_device("core")
+        self.setattr_device("urukul0_cpld")  # Using cpld0
+
         self.dds = self.get_device("urukul0_ch1")
 
     
     @kernel
     def run(self):
-
+        self.core.reset() #resets core device - may not be necessary 
         n = 10
         data = [0]*(1 << n)
         for i in range(len(data)//2):
@@ -26,6 +28,7 @@ class ad9910RAM(EnvExperiment):
         self.dds.init()
         delay(1*ms)
 
+        self.dds.set_cfr1()
         self.dds.set_profile_ram(
             start=0, end=0+ len(data) - 1, step=5,
             profile = 0, mode = RAM_MODE_BIDIR_RAMP
@@ -33,8 +36,8 @@ class ad9910RAM(EnvExperiment):
 
         self.dds.cpld.set_profile(0)
         self.dds.cpld.io_update.pulse_mu(8)
+        
         delay(1*ms)
-
         self.dds.write_ram(data)
         delay(10*ms)
 
@@ -45,17 +48,17 @@ class ad9910RAM(EnvExperiment):
         self.dds.set_att(10*dB)
         self.dds.sw.on()
 
-        self.core.break_realtime()
+        # self.core.break_realtime()
 
         while True:
-            delay(1*ms)
+            delay(10*s)
 
             
-            self.dds.cpld.set_profile(0)
+            # self.dds.cpld.set_profile(0)
 
         
-            delay(2*us)
+            delay(20*s)
 
             
-            self.dds.cpld.set_profile(1)
+            # self.dds.cpld.set_profile(1)
 

@@ -10,6 +10,7 @@ class FrequencyRamp(EnvExperiment):
     def run(self):
         n = 10
         data = [0] * (1 << n)
+        
         for i in range(len(data) // 2):
             data[i] = int(self.dds.frequency_to_ftw(i * (50 * MHz / (len(data) // 2))))
             data[i + len(data) // 2] = self.dds.frequency_to_ftw(50 * MHz)
